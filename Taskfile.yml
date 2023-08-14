@@ -1,0 +1,51 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  stack:up:
+    desc: Start the Prez stack.
+    cmds:
+      - docker-compose --profile stack up -d
+
+  stack:down:
+    desc: Stop the Prez stack.
+    cmds:
+      - docker-compose --profile stack down
+
+  stack:prez:up:
+    desc: Start the Prez service in the Prez stack.
+    cmds:
+      - docker-compose --profile prez up -d
+
+  stack:prez:down:
+    desc: Stop the Prez service in the Prez stack.
+    cmds:
+      - docker-compose --profile prez down
+
+  stack:ui:up:
+    desc: Start the Prez UI service in the Prez stack.
+    cmds:
+      - docker-compose --profile ui up -d
+
+  stack:ui:down:
+    desc: Stop the Prez UI service in the Prez stack.
+    cmds:
+      - docker-compose --profile ui down
+
+  stack:ui:rebuild:
+    desc: Build prez-ui, stop it and start it again.
+    cmds:
+      - docker-compose build prez-ui
+      - docker-compose stop prez-ui
+      - docker-compose --profile ui up -d
+
+  stack:ui:dev:build:
+    desc: Build the custom Prez UI dev container.
+    cmds:
+      - docker-compose build prez-ui-dev 
+
+  stack:ui:dev:
+    desc: Run the dev container of custom Prez UI components for development.
+    cmds:
+      - docker-compose run --rm -it -p 5173:5173 prez-ui-dev /bin/bash
