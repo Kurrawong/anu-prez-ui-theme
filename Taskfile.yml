@@ -3,6 +3,10 @@
 version: "3"
 
 tasks:
+  stack:build:
+    cmds:
+      - docker-compose --progress plain build prez-ui
+
   stack:up:
     desc: Start the Prez stack.
     cmds:
